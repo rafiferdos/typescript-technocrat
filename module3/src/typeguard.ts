@@ -47,4 +47,67 @@ const MilitiaPeole1: Militia = {
   position: "colonel",
 };
 
-console.log(NormalPeople1, MilitiaPeole1)
+console.log(NormalPeople1, MilitiaPeole1);
+
+class Animal {
+  name: string;
+  species: string;
+
+  constructor(name: string, species: string) {
+    this.name = name;
+    this.species = species;
+  }
+  makeSound() {
+    console.log(`I am a ${this.name} and making sound`);
+  }
+}
+
+class Dog extends Animal {
+  constructor(name: string, species: string) {
+    super(name, species);
+  }
+  makeBark() {
+    console.log(`I am barking`);
+  }
+}
+
+class Cat extends Animal {
+  constructor(name: string, species: string) {
+    super(name, species);
+  }
+  makeMeaw() {
+    console.log(`I am meawing`);
+  }
+}
+
+const cat = new Cat("daisy", "cat");
+const dog = new Dog("tommy", "dog");
+
+const getAnimal = (animal: Animal) => {
+  if (animal instanceof Dog) {
+    animal.makeBark();
+  } else if (animal instanceof Cat) {
+    animal.makeMeaw();
+  } else {
+    animal.makeSound();
+  }
+};
+
+// shorthand
+const getAnimal2 = (animal: Animal) =>
+  animal instanceof Dog
+    ? animal.makeBark()
+    : animal instanceof Cat
+    ? animal.makeMeaw()
+    : animal.makeSound();
+
+//another smart way
+const isDog = (animal: Animal) : animal is Dog => animal instanceof Dog;
+const isCat = (animal: Animal) : animal is Cat => animal instanceof Cat;
+
+const getAnimal3 = (animal: Animal) =>
+  isDog(animal)
+    ? animal.makeBark()
+    : isCat(animal)
+    ? animal.makeMeaw()
+    : animal.makeSound();
